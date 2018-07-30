@@ -18,11 +18,6 @@
     <meta itemprop="name" content="{{ $.Site.Params.name }}">
   </span>
   {{ end }}
-  {{ else }}
-  <div itemscope itemprop="author" itemtype="http://schema.org/Person">
-    <span itemprop="name">{{ $.Site.Params.name }}</span>
-  </div>
-  {{ end }}
 
   <span class="article-date">
     {{ if ne $.Params.Lastmod $.Params.Date }}
