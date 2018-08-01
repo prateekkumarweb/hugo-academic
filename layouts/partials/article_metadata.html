@@ -21,7 +21,7 @@
 
   <span class="article-date">
     {{ if ne $.Params.Lastmod $.Params.Date }}
-        {{ i18n "last_updated" }}
+        {{ i18n "last_updated" }}&nbsp;
     {{ end }}
     <meta content="{{ $.Params.Date }}" itemprop="datePublished">
     <time datetime="{{ $.Params.LastMod }}" itemprop="dateModified">
