@@ -19,11 +19,20 @@
   </span>
   {{ end }}
 
+  {{ if ne $.Params.Lastmod $.Params.Date }}
+  <span class="article-date">
+    <time datetime="{{ $.Params.Date }}" itemprop="datePublished">
+      {{ $.Date.Format $.Site.Params.date_format }}
+    </time>
+  </span>
+  <span class="middot-divider"></span>
+  {{ else }}
+  <meta content="{{ $.Params.Date }}" itemprop="datePublished">
+  {{ end }}
   <span class="article-date">
     {{ if ne $.Params.Lastmod $.Params.Date }}
         {{ i18n "last_updated" }}&nbsp;
     {{ end }}
-    <meta content="{{ $.Params.Date }}" itemprop="datePublished">
     <time datetime="{{ $.Params.LastMod }}" itemprop="dateModified">
       {{ $.Lastmod.Format $.Site.Params.date_format }}
     </time>
