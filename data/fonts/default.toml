@@ -2,14 +2,14 @@
 name = "Default"
 
 # Optional Google font URL
-google_fonts = "Montserrat:400,700|Roboto:400,400italic,700|Roboto+Mono"
+google_fonts = "Noto+Sans|Montserrat:400,700|Roboto:400,400italic,700|Roboto+Mono"
 
 # Font families
-heading_font = "Montserrat"
-body_font = "Roboto"
-nav_font = "Roboto"
+heading_font = "Noto Sans"
+body_font = "Noto Sans"
+nav_font = "Noto Sans"
 mono_font = "Roboto Mono"
 
 # Font size
-font_size = "20"
-font_size_small = "16"
+font_size = "18"
+font_size_small = "14"
