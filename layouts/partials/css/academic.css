@@ -176,6 +176,8 @@ pre {
   margin: 0 0 1rem 0;
   background-color: rgb(248, 248, 248); /* Match default highlight theme. */
   border-color: rgb(248, 248, 248);
+  font-size: 0.7rem;
+  border-radius: 4px;
 }
 
 pre code {
@@ -302,15 +304,25 @@ small,
  *  Modals.
  **************************************************/
 
-.modal-header .close {
-  font-size: 40px; /* Bigger cross. */
-  height: 30px; /* Remove icon's vertical spacing. */
-  position: relative;
-  top: -5px;
+.modal-content {
+  background: {{ .Get "background" }};
+}
+
+.modal-title {
+  margin: 0; /* Override default h5 margin. */
 }
 
 .modal-content pre {
   margin: 0;
+}
+
+.modal-header {
+  border: 0;
+  color: rgba(0,0,0,0.8);
+}
+
+.modal-footer {
+  border: 0;
 }
 
 #modal-error {
@@ -1046,23 +1058,6 @@ footer a#back_to_top i {
   color: #899596;
 }
 
-/*************************************************
- *  Button size override
- *************************************************/
-
-.btn {
-  padding: .5rem;
-  font-size: .8rem;
-  line-height: .5;
-  border-radius: .3rem;
-}
-
-.btn.btn-sm {
-  padding: .4rem;
-  font-size: .6rem;
-  border-radius: .2rem;
-}
-
 /**************************************************
  *  Tags/Labels
  **************************************************/
@@ -1093,17 +1088,34 @@ a.badge:hover {
 }
 
 /*************************************************
- *  Button Primary: Color Override
+ *  Button size override
+ *************************************************/
+
+.btn {
+  padding: .5rem;
+  font-size: .8rem;
+  line-height: .5;
+  border-radius: .3rem;
+}
+
+.btn.btn-sm {
+  padding: .4rem;
+  font-size: .6rem;
+  border-radius: .2rem;
+}
+
+/*************************************************
+ *  Button Primary: Color override
  **************************************************/
 
 .btn-primary {
-  border-color: {{ .Get "primary" }} !important;
-  background: {{ .Get "primary" }} !important;
+  border-color: {{ .Get "primary" }};
+  background: {{ .Get "primary" }};
 }
 
 .btn-outline-primary {
-  border-color: {{ .Get "primary" }} !important;
-  color: {{ .Get "primary" }} !important;
+  border-color: {{ .Get "primary" }};
+  color: {{ .Get "primary" }};
 }
 
 .btn-primary:hover,
@@ -1111,13 +1123,27 @@ a.badge:hover {
 .btn-primary.active,
 .btn-primary:visited,
 .open > .dropdown-toggle.btn-primary {
-  background: {{ .Get "primary" }} !important;
+  background: {{ .Get "primary" }};
 }
 
 .btn-outline-light:hover,
 .btn-outline-light:active,
 .btn-outline-light.active {
-  background: rgba(0,0,0,0.4) !important;
+  background: rgba(0,0,0,0.4);
+}
+
+.btn-outline-primary:not(:disabled):not(.disabled).active,
+.btn-outline-primary:not(:disabled):not(.disabled):active,
+.show > .btn-outline-primary.dropdown-toggle {
+  color: #fff;
+  background-color: {{ .Get "primary" }};
+  border-color: {{ .Get "primary" }};
+}
+
+.btn-outline-primary:hover {
+  color: #fff;
+  background-color: {{ .Get "primary" }};
+  border-color: {{ .Get "primary" }};
 }
 
 /*************************************************
@@ -1148,6 +1174,12 @@ a.badge:hover {
   background-color: {{ .Get "primary_light" }} !important;
 }
 
+.btn-primary:not(:disabled):not(.disabled).active:focus,
+.btn-primary:not(:disabled):not(.disabled):active:focus,
+.show > .btn-primary.dropdown-toggle:focus {
+  box-shadow: 0 0 0 .2rem {{ .Get "primary_dark" }};
+}
+
 /*************************************************
  *  Navigation Bar
  **************************************************/
@@ -1174,6 +1206,7 @@ a.badge:hover {
   background-color: transparent;
 }
 
+.dropdown-menu,
 nav#navbar-main li.nav-item {
   font-size: {{ .Get "font_size_small" }}px;
 }
@@ -1290,16 +1323,6 @@ nav#navbar-main li.nav-item {
     max-height: 40px;
   }
 
-  /*.navbar-header {
-    float: none;
-    min-height: inherit;
-  }*/
-
-  /*.navbar-nav.mr-auto,
-  .navbar-nav.ml-auto {
-    float: none !important;
-  }*/
-
   .navbar-toggler {
     display: block;
   }
@@ -1308,19 +1331,6 @@ nav#navbar-main li.nav-item {
     top: 0;
     border-width: 0 0 1px;
   }
-
-  /*.navbar-collapse.collapse {
-    display: none !important;
-  }*/
-
-  /*.navbar-nav {
-    float: none !important;
-    margin-top: 7.5px;
-  }*/
-
-  /*.navbar-nav > li {
-    float: none;
-  }*/
 
   .navbar-nav > li.nav-item > a.nav-link {
     padding-top: 10px;
@@ -1340,7 +1350,6 @@ nav#navbar-main li.nav-item {
 
   .navbar-light .navbar-nav .open .dropdown-menu {
     position: static;
-    /*float: none;*/
     width: auto;
     margin-top: 0;
     background-color: transparent;
@@ -1499,6 +1508,14 @@ body.dark {
   color: rgb(248, 248, 242);
 }
 
+.dark input {
+  color: rgb(248, 248, 242);
+}
+
+.dark .modal button.close {
+  color: rgb(248, 248, 242);
+}
+
 .dark h1,
 .dark h2,
 .dark h3,
@@ -1613,17 +1630,17 @@ body.dark {
   background-color: rgb(68, 71, 90);
 }
 
-.dark .label-default {
+.dark .badge-light {
   color: rgba(255, 255, 255, .68);
   background: rgba(255, 255, 255, .2);
 }
 
-.dark .label-default[href]:focus,
-.dark .label-default[href]:hover {
+.dark .badge-light[href]:focus,
+.dark .badge-light[href]:hover {
   background: rgba(255, 255, 255, .3);
 }
 
-.dark a.label:focus,
-.dark a.label:hover {
+.dark a.badge:focus,
+.dark a.badge:hover {
   color: rgba(255, 255, 255, .68);
 }
