@@ -66,7 +66,7 @@
     {{ if eq $page.Params.view 0 }}
 
     <div class="row isotope projects-container js-layout-row">
-        {{ range $projects }}
+        {{ range where $.Site.RegularPages "Type" ($page.Params.folder | default "project") }}
         <div class="col-lg-12 project-item isotope-item {{ delimit (apply .Params.tags "urlize" ".") " " }}" itemscope itemtype="http://schema.org/CreativeWork">
           <i class="far fa-copy pub-icon" aria-hidden="true"></i>
 
