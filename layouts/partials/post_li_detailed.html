@@ -3,17 +3,13 @@
 <div class="card-simple" itemscope itemprop="blogPost" itemtype="http://schema.org/BlogPosting">
   {{ partial "article_metadata" (dict "content" $post "is_list" 1) }}
 
-  {{ $preview := $post.Params.header.preview | default true }}
-  {{ if and $post.Params.header.image $preview }}
+  {{ $resource := ($post.Resources.ByType "image").GetMatch "*featured*" }}
+  {{ with $resource }}
   <a href="{{ $post.RelPermalink }}">
-    {{ $img_src := urls.Parse $post.Params.header.image }}
-    {{ if $img_src.Scheme }}
-      <img src="{{ $post.Params.header.image }}" class="article-banner" itemprop="image">
-    {{ else }}
-      <img src="{{ "/img/" | relURL }}{{ $post.Params.header.image }}" class="article-banner" itemprop="image">
-    {{ end }}
+    <img src="{{ $resource.RelPermalink }}" class="article-banner" itemprop="image">
   </a>
   {{end}}
+
   <h3 class="article-title" itemprop="headline">
     <a href="{{ $post.RelPermalink }}" itemprop="url">{{ $post.Title }}</a>
   </h3>
