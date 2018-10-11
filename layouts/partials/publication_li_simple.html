@@ -2,9 +2,7 @@
   <i class="far fa-file-alt pub-icon" aria-hidden="true"></i>
   <a href="{{ .RelPermalink }}" itemprop="name">{{ .Title }}</a>
   <div itemprop="author">
-    {{ with .Params.authors }}
-      {{- delimit . ", " | markdownify -}}
-    {{- end -}}
+    {{- partial "list_authors.html" . -}}
   </div>
   <p>{{ partial "publication_links" (dict "content" . "is_list" 1) }}</p>
 </div>

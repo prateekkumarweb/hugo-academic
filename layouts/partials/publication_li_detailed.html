@@ -31,9 +31,7 @@
   </div>
 
   <div class="pub-authors" itemprop="author">
-    {{ with .Params.authors }}
-    {{ delimit . ", " | markdownify }}
-    {{ end }}
+    {{ partial "list_authors.html" . }}
   </div>
 
   <div class="pub-publication">

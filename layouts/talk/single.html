@@ -9,9 +9,7 @@
     <div class="pub-title">
       <h1 itemprop="name">{{ .Title }}</h1>
       <span class="pub-authors" itemprop="author">
-        {{ with .Params.authors }}
-        {{ delimit . ", " | markdownify }}
-        {{ end }}
+        {{ partial "list_authors.html" . }}
       </span>
       <span class="float-right">
         {{ partial "share.html" . }}
