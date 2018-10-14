@@ -66,18 +66,21 @@
       <div class="row isotope projects-container js-layout-masonry">
 
         {{ range $project := $page.Pages.ByDate.Reverse }}
-        {{ $.Scratch.Set "project_url" $project.Permalink }}
-        {{ $.Scratch.Set "target" "" }}
-        {{ if $project.Params.external_link }}
-        {{   $.Scratch.Set "project_url" $project.Params.external_link }}
-        {{   $.Scratch.Set "target" "target=\"_blank\"" }}
-        {{ end }}
+          {{ $.Scratch.Set "project_url" $project.RelPermalink }}
+          {{ $.Scratch.Set "target" "" }}
+          {{ if $project.Params.external_link }}
+          {{   $.Scratch.Set "project_url" $project.Params.external_link }}
+          {{   $.Scratch.Set "target" "target=\"_blank\" rel=\"noopener\"" }}
+          {{ end }}
+          {{ $resource := ($project.Resources.ByType "image").GetMatch "*featured*" }}
+          {{ $anchor := $project.Params.image.focal_point | default "Smart" }}
         <div class="col-12 col-md-6 col-lg-4 project-item isotope-item {{ delimit (apply .Params.tags "urlize" ".") " " }}">
           <div class="card">
-            {{ with $project.Params.image_preview }}
-            <a href="{{ $.Scratch.Get "project_url" }}" title="" class="card-image hover-overlay"
+            {{ with $resource }}
+            {{ $image := .Fill (printf "550x550 q90 %s" $anchor) }}
+            <a href="{{ $.Scratch.Get "project_url" }}" {{ $.Scratch.Get "target" | safeHTMLAttr }} class="card-image hover-overlay"
                {{ $.Scratch.Get "target" | safeHTMLAttr }}>
-              <img src="{{ "/img/" | relURL }}{{ . }}" alt="" class="img-responsive">
+              <img src="{{ $image.RelPermalink }}" alt="" class="img-responsive">
             </a>
             {{ end }}
             <div class="card-text">
