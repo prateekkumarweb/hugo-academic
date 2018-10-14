@@ -37,9 +37,7 @@
         {{ end }}
       </div>
       <div itemprop="author">
-        {{ with .Params.authors }}
-        {{- delimit . ", " | markdownify -}}
-        {{- end -}}
+        {{- partial "list_authors.html" . -}}
       </div>
     </div>
 
