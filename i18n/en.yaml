@@ -115,6 +115,12 @@
 - id: last_updated
   translation: Last updated on
 
+- id: site_last_updated
+  translation: Site last updated on
+
+- id: page_last_updated
+  translation: This page was last updated on
+
 - id: links
   translation: Links
 

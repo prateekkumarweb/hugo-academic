@@ -12,7 +12,11 @@
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
     <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
     <br>
-    Last updated on {{ now.Format "Jan 2, 2006 15:04:05 MST" }}
+    {{ if $.Params.Lastmod }}
+    {{ i18n "page_last_updated" }} {{ $.Lastmod.Format "Jan 2, 2006" }}.
+    {{ else }}
+    {{ i18n "site_last_updated" }} {{ now.Format "Jan 2, 2006" }}.
+    {{ end }}
 
     {{ if ne .Type "docs" }}
     <span class="float-right" aria-hidden="true">
