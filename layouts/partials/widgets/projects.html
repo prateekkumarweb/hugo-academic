@@ -1,29 +1,11 @@
 {{ $ := .root }}
 {{ $page := .page }}
 
-{{ $.Scratch.Set "projects" (where $.Site.RegularPages "Type" ($page.Params.folder | default "project")) }}
-{{ $projects_len := len ($.Scratch.Get "projects") }}
-{{ if $page.Params.selected_only }}
-  {{ $.Scratch.Set "projects" (where ($.Scratch.Get "projects") ".Params.selected" true) }}
-{{ end }}
-{{ if $page.Params.count }}
-  {{ $.Scratch.Set "projects" (first $page.Params.count ($.Scratch.Get "projects")) }}
-{{ end }}
-{{ $projects := $.Scratch.Get "projects" }}
-
 <!-- Projects widget -->
 <div class="row">
   <div class="col-12 col-lg-4 section-heading">
     <h2>{{ with $page.Title }}{{ . | markdownify }}{{ end }}</h2>
     {{ with $page.Params.subtitle }}<p>{{ . | markdownify }}</p>{{ end }}
-    {{ if or $page.Params.selected_only (and $page.Params.count (gt $projects_len $page.Params.count)) }}
-    <p class="view-all">
-      <a href="{{ ($.Site.GetPage "section" ($page.Params.folder | default "project")).Permalink }}">
-        {{ i18n "more_projects" | markdownify }}
-        <i class="fa fa-angle-double-right"></i>
-      </a>
-    </p>
-    {{ end }}
   </div>
   <div class="col-12 col-lg-8">
     {{ with $page.Content }}<p>{{ . | markdownify }}</p>{{ end }}
@@ -88,7 +70,7 @@
 
     <div class="row isotope projects-container js-layout-masonry">
 
-      {{ range $project := $projects }}
+      {{ range $project := where $.Site.RegularPages "Type" ($page.Params.folder | default "project") }}
         {{ $.Scratch.Set "project_url" $project.RelPermalink }}
         {{ $.Scratch.Set "target" "" }}
         {{ if $project.Params.external_link }}
