@@ -3,14 +3,11 @@
   {{- range $index, $element := $authors -}}
     {{- $value := "" -}}
     {{- $key := substr $element 1 -}}
-    {{- if (and (eq (substr $element 0 1) "@") (isset $.Site.Data.people $key)) -}}
+    {{- if (and (eq (substr $element 0 1) "@") $.Site.Data.people) -}}
       {{- $author := index $.Site.Data.people $key -}}
       {{- $name := index $author "name" -}}
-      {{- $url := "" -}}
-      {{- if (isset $author "url") -}}
-        {{- $url = index $author "url" -}}
-      {{- end -}}
-      {{- if (ne $url "") -}}
+      {{- $url := index $author "url" -}}
+      {{- if $url -}}
         {{- $value = printf "[%s](%s)" $name $url -}}
       {{- else -}}
         {{- $value = $name -}}

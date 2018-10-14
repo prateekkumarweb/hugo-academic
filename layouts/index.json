@@ -14,9 +14,13 @@
     {{- $authors_list := .Params.Authors -}}
     {{- range $index, $element := $authors_list -}}
       {{- $key := substr $element 1 -}}
-      {{- if (and (eq (substr $element 0 1) "@") (isset $.Site.Data.people $key)) -}}
+      {{- if (and (eq (substr $element 0 1) "@") $.Site.Data.people) -}}
         {{- $author := index $.Site.Data.people $key -}}
-        {{- $authors = $authors | append (index $author "name") -}}
+        {{- if $author -}}
+          {{- $authors = $authors | append (index $author "name") -}}
+        {{- else -}}
+          {{- $authors = $authors | append $element -}}
+        {{- end -}}
       {{- else -}}
         {{- $authors = $authors | append $element -}}
       {{- end -}}
