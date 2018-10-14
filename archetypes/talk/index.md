@@ -27,8 +27,9 @@ selected = false
 
 # Projects (optional).
 #   Associate this talk with one or more of your projects.
-#   Simply enter your project's filename without extension.
-#   E.g. `projects = ["deep-learning"]` references `content/project/deep-learning.md`.
+#   Simply enter your project's folder or file name without extension.
+#   E.g. `projects = ["deep-learning"]` references 
+#   `content/project/deep-learning/index.md`.
 #   Otherwise, set `projects = []`.
 projects = []
 
@@ -42,16 +43,13 @@ url_slides = ""
 url_video = ""
 url_code = ""
 
-# Does the content use math formatting?
-math = false
-
-# Does the content use source code highlighting?
-highlight = true
-
 # Featured image
-# Place your image in the `static/img/` folder and reference its filename below, e.g. `image = "example.jpg"`.
-[header]
-image = ""
-caption = ""
+# To use, add an image named `featured.jpg/png` to your page's folder. 
+[image]
+  # Caption (optional)
+  caption = ""
 
+  # Focal point (optional)
+  # Options: Smart, Center, TopLeft, Top, TopRight, Left, Right, BottomLeft, Bottom, BottomRight
+  focal_point = ""
 +++

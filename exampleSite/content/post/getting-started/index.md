@@ -1,5 +1,6 @@
 +++
 title = "Academic: the website designer for Hugo"
+subtitle = "Create a beautifully simple website in under 10 minutes :rocket:"
 
 date = 2016-04-20T00:00:00
 lastmod = 2018-01-13T00:00:00
@@ -11,8 +12,15 @@ authors = []
 tags = ["Academic"]
 summary = "Create a beautifully simple website or blog in under 10 minutes."
 
-[header]
-caption = "Image credit: [**Unsplash**](https://unsplash.com/photos/CpkOjOcXdUY)"
+# Featured image
+# To use, add an image named `featured.jpg/png` to your project's folder. 
+[image]
+  # Caption (optional)
+  caption = "Image credit: [**Unsplash**](https://unsplash.com/photos/CpkOjOcXdUY)"
+
+  # Focal point (optional)
+  # Options: Smart, Center, TopLeft, Top, TopRight, Left, Right, BottomLeft, Bottom, BottomRight
+  focal_point = ""
 
 [[gallery_item]]
 album = "1"

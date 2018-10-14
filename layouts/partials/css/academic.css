@@ -643,7 +643,7 @@ ul.share li:hover i {
 }
 
 /*************************************************
- *  Blog Articles
+ *  Page content style
  **************************************************/
 
 article {
@@ -653,12 +653,49 @@ article {
 
 .article-container {
   max-width: 760px;
-  padding: 1rem 20px 0 20px;
+  padding: 0 20px 0 20px;
   margin: 0 auto 0 auto;
 }
 
+.split-header {
+  margin-bottom: 2rem;
+}
+
+.split-header .share-box {
+  float: left;
+}
+
+.page-subtitle {
+  font-size: 1.15rem;
+  color: rgba(0,0,0,.54);
+  margin-bottom: 1rem;
+}
+
+.dark .page-subtitle {
+  color: rgba(255,255,255,0.54);
+}
+
+.split-header .page-subtitle {
+  margin-bottom: 1.5rem;
+}
+
+.split-header-content {
+  max-width: 612px;
+  width: 100%;
+  padding: 60px 60px 32px 0;
+  margin-left: auto;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.split-header-image {
+  position: relative; /* Required for caption positioning */
+  clear: both;
+  max-width: 580px;
+}
+
 .article-header {
-  position: relative;
+  position: relative; /* Required for caption positioning */
   clear: both;
 }
 
@@ -701,12 +738,28 @@ article {
   transition: color 0.6s ease;
 }
 
+.text-muted {
+  color: rgba(0,0,0,0.54); /* Override Bootstrap */
+}
+
+.dark .text-muted {
+  color: rgba(255,255,255,0.54);
+}
+
 .article-metadata {
   margin-bottom: 15px;
   overflow: hidden;
   font-size: 14px;
   letter-spacing: 0.03em;
-  color: #888;
+  color: rgba(0,0,0,0.54);
+}
+
+.dark .article-metadata {
+  color: rgba(255,255,255,0.54);
+}
+
+.stream-meta.article-metadata {
+  margin-bottom: 5px;
 }
 
 /* For article page only, not lists. */
@@ -717,6 +770,10 @@ article .article-metadata {
 
 .article-metadata a {
   color: rgba(0,0,0,.54);
+}
+
+.dark .article-metadata a {
+  color: rgba(255,255,255,0.54);
 }
 
 .article-metadata a:hover {
@@ -842,13 +899,19 @@ article .article-metadata {
 .pub-list-item .pub-authors {
   line-height: normal;
   font-style: normal;
-  font-size: 1rem;
-  color: #3170A5;
+  font-size: 0.9rem;
+  color: rgba(0,0,0,0.54);
 }
 
 .pub-list-item .pub-publication {
-  color: #090;
-  font-size: 1rem;
+  color: rgba(0,0,0,0.54);
+  font-size: 0.9rem;
+}
+
+
+.dark .pub-authors,
+.dark .pub-publication {
+  color: rgba(255,255,255,0.54);
 }
 
 .pub-list-item .pub-links {
@@ -1030,8 +1093,12 @@ article .article-metadata {
 }
 
 .card .card-text p {
-  color: #999999;
+  color: rgba(0,0,0,0.54);
   font-size: 0.75rem;
+}
+
+.dark .card-text p {
+  color: rgb(248, 248, 242);
 }
 
 .card p:last-child {
@@ -1127,7 +1194,13 @@ footer p {
 
 .site-footer,
 footer a#back_to_top i {
-  color: #899596;
+  color: rgba(0,0,0,0.54);
+}
+
+.dark .site-footer,
+.dark footer a#back_to_top i,
+.dark .docs .body-footer {
+  color: rgba(255,255,255,0.54);
 }
 
 /**************************************************
@@ -1238,18 +1311,18 @@ a.badge:hover {
 
 .btn-toolbar .btn.btn-primary:hover,
 .btn-toolbar .btn.btn-primary:focus {
-  background-color: {{ .Get "primary_dark" }} !important;
+  background-color: {{ .Get "primary_light" }} !important;
 }
 
 .btn-toolbar .btn.btn-primary:active,
 .btn-toolbar .btn.btn-primary.active {
-  background-color: {{ .Get "primary_light" }} !important;
+  background-color: {{ .Get "primary_dark" }} !important;
 }
 
 .btn-primary:not(:disabled):not(.disabled).active:focus,
 .btn-primary:not(:disabled):not(.disabled):active:focus,
 .show > .btn-primary.dropdown-toggle:focus {
-  box-shadow: 0 0 0 .2rem {{ .Get "primary_dark" }};
+  box-shadow: 0 0 0 .2rem {{ .Get "primary_light" }};
 }
 
 /*************************************************
