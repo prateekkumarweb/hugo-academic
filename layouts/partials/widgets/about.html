@@ -7,7 +7,7 @@
     <div id="profile">
 
       {{ if $.Site.Params.gravatar }}
-      <img class="portrait" src="https://s.gravatar.com/avatar/{{ md5 $.Site.Params.email }}?s=200')" itemprop="image" alt="Avatar">
+      <img class="portrait" src="https://www.gravatar.com/avatar/{{ md5 $.Site.Params.email }}?s=200" itemprop="image" alt="Avatar">
       {{ else if $.Site.Params.avatar }}
       <img class="portrait" src="{{ (printf "img/%s" $.Site.Params.avatar) | relURL }}" itemprop="image" alt="Avatar">
       {{ end }}
@@ -37,7 +37,13 @@
       <link itemprop="url" href="{{ $.Site.BaseURL }}">
 
       <ul class="network-icon" aria-hidden="true">
-        {{ range $.Site.Params.social }}
+        {{ $social := $.Site.Params.social }}
+        {{ if $.Site.Params.id }}
+        {{ $key := substr $.Site.Params.id 1 }}
+        {{ $p := index $.Site.Data.people $key }}
+        {{ $social = index $p "social" }}
+        {{ end }}
+        {{ range $social }}
         {{ $pack := or .icon_pack "fas" }}
         {{ $pack_prefix := $pack }}
         {{ if in (slice "fab" "fas" "far" "fal") $pack }}

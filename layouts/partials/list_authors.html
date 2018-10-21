@@ -14,10 +14,10 @@
       {{- end -}}
     {{- else -}}
       {{- . | markdownify -}}
-      {{- end -}}
-      {{- if (ne (add $index 1) (len $authors)) -}}
+    {{- end -}}
+    {{- if (ne (add $index 1) (len $authors)) -}}
       {{- printf "%s,&nbsp;" $value | markdownify -}}
-      {{- else -}}
+    {{- else -}}
       {{- $value | markdownify -}}
     {{- end -}}
   {{- end -}}
