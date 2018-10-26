@@ -3,7 +3,7 @@
 {{ $autolink := default true $page.Params.autolink }}
 
 <!-- Contact widget -->
-<div class="row">
+<div class="row contact-widget">
   <div class="col-12 col-lg-4 section-heading">
     <h2>{{ with $page.Title }}{{ . | markdownify }}{{ end }}</h2>
     {{ with $page.Params.subtitle }}<p>{{ . | markdownify }}</p>{{ end }}
