@@ -4,12 +4,29 @@
 
   {{/* If `authors` is set and is not empty. */}}
   {{ if $.Params.authors }}
-  {{ $authorLen := len $.Params.authors }}
+  {{- $authorLen := len $.Params.authors -}}
   <div>
-    {{ range $k, $v := $.Params.authors -}}
-    <span itemscope itemprop="author" itemtype="http://schema.org/Person">
-      <span itemprop="name">{{- $v | markdownify -}}</span>
-    </span>
+    {{ range $k, $v := $.Params.authors }}
+    {{- $key := substr $v 1 -}}
+    {{- if (and (eq (substr $v 0 1) "@") $.Site.Data.people) -}}
+      {{- $author := index $.Site.Data.people $key -}}
+      {{- if $author -}}
+        <span itemscope itemprop="author" itemtype="http://schema.org/Person">
+          {{- $url := index $author "url" -}}
+          {{- if $url -}}<a href="{{- $url -}}">{{- end -}}
+            <span itemprop="name">{{- index $author "name" -}}</span>
+          {{- if $url -}}</a>{{- end -}}
+        </span>
+      {{- else -}}
+        <span itemscope itemprop="author" itemtype="http://schema.org/Person">
+          <span itemprop="name">{{- $v | markdownify -}}</span>
+        </span>
+      {{- end -}}
+    {{- else -}}
+      <span itemscope itemprop="author" itemtype="http://schema.org/Person">
+        <span itemprop="name">{{- $v | markdownify -}}</span>
+      </span>
+    {{- end -}}
     {{- if lt $k (sub $authorLen 1) -}}, {{ end }}
     {{ end }}
   </div>
