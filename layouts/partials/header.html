@@ -144,7 +144,7 @@
   {{ end }}
   <meta property="og:site_name" content="{{ .Site.Title }}">
   <meta property="og:url" content="{{ .Permalink }}">
-  <meta property="og:title" content="{{ if not .IsHome }}{{ .Title }} | {{ end }}{{ .Site.Title }}">
+  <meta property="og:title" content="{{ if not .IsHome }}{{ .Title }} | {{ .Site.Title }}{{ else }}{{ .Site.Title }} | {{ .Site.Params.role }}{{ range .Site.Params.organizations }} | {{ .name }}{{ end }}{{ end }}">
   <meta property="og:description" content="{{ $desc }}">
   {{- with $og_image }}<meta property="og:image" content="{{ . }}">{{end}}
   <meta property="og:locale" content="{{ .Site.LanguageCode | default "en-us" }}">
@@ -159,7 +159,7 @@
   {{ partial "cookie_consent" . }}
   {{ partial "head_custom" . }}
 
-  <title>{{ if not .IsHome }}{{ .Title }} | {{ end }}{{ .Site.Title }}</title>
+  <title>{{ if not .IsHome }}{{ .Title }} | {{ .Site.Title }}{{ else }}{{ .Site.Title }} | {{ .Site.Params.role }}{{ range .Site.Params.organizations }} | {{ .name }}{{ end }}{{ end }}</title>
 
 </head>
 <body id="top" data-spy="scroll" data-target="{{ if or .IsHome .Params.widgets }}#navbar-main{{ else }}#TableOfContents{{ end }}" data-offset="71" {{ if not ($scr.Get "light") }}class="dark"{{ end }}>
