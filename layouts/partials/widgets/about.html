@@ -37,7 +37,13 @@
       <link itemprop="url" href="{{ $.Site.BaseURL }}">
 
       <ul class="network-icon" aria-hidden="true">
-        {{ range $.Site.Params.social }}
+        {{ $social := $.Site.Params.social }}
+        {{ if $.Site.Params.id }}
+        {{ $key := substr $.Site.Params.id 1 }}
+        {{ $p := index $.Site.Data.people $key }}
+        {{ $social = index $p "social" }}
+        {{ end }}
+        {{ range $social }}
         {{ $pack := or .icon_pack "fas" }}
         {{ $pack_prefix := $pack }}
         {{ if in (slice "fab" "fas" "far" "fal") $pack }}
