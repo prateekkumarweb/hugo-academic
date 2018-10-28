@@ -1,24 +1,45 @@
 {{ if not (or (eq .Site.Params.profile false) (eq .Params.profile false)) }}
 
-{{ $author := "" }}
-{{ if .Params.authors }}
-  {{ $author = index .Params.authors 0 }}
-{{ end }}
-
-{{/* Display site author if page authors not explicitly specified or if first page author is site author. */}}
-{{ if or (not .Params.authors) (eq $author $.Site.Params.name) }}
+{{/* if or (not .Params.authors) (eq $author $.Site.Params.name) */}}
+{{- range $index, $element := .Params.authors -}}
+{{- $value := "" -}}
+{{- $key := substr $element 1 -}}
+{{- $author_name := $element -}}
+{{- $author_url := "" -}}
+{{- $author_email := "" -}}
+{{- $author_gravatar := false -}}
+{{- $author_avatar := "" -}}
+{{- $author_role := "" -}}
+{{- $author_bio := "" -}}
+{{- $author_social := "" -}}
+{{- if (and (eq (substr $element 0 1) "@") $.Site.Data.people) -}}
+  {{- $author := index $.Site.Data.people $key -}}
+  {{- $author_name = index $author "name" -}}
+  {{- $author_url = index $author "url" -}}
+  {{- $author_email = index $author "email" -}}
+  {{- $author_gravatar = index $author "gravatar" -}}
+  {{- $author_avatar = index $author "avatar" -}}
+  {{- $author_role = index $author "role" -}}
+  {{- $author_bio = index $author "bio" -}}
+  {{- $author_social = index $author "social" -}}
+{{- end -}}
 <div class="media author-card" itemscope itemtype="http://schema.org/Person">
-  {{ if $.Site.Params.gravatar }}
-  <img class="portrait mr-3" src="https://s.gravatar.com/avatar/{{ md5 $.Site.Params.email }}?s=200')" itemprop="image" alt="Avatar">
-  {{ else if $.Site.Params.avatar }}
-  <img class="portrait mr-3" src="{{ (printf "img/%s" $.Site.Params.avatar) | relURL }}" itemprop="image" alt="Avatar">
+  {{ if $author_gravatar }}
+  <img class="portrait mr-3" src="https://www.gravatar.com/avatar/{{ md5 $author_email }}?s=200" itemprop="image" alt="Avatar">
+  {{ else if $author_avatar }}
+  <img class="portrait mr-3" src="{{ (printf "img/%s" $author_avatar) | relURL }}" itemprop="image" alt="Avatar">
+  {{ else if $author_email }}
+  <img class="portrait mr-3" src="https://www.gravatar.com/avatar/{{ md5 $author_email }}?s=200&d=identicon" itemprop="image" alt="Avatar">
+  {{ else }}
+  <img class="portrait mr-3" src="https://www.gravatar.com/avatar/{{ md5 $author_name }}?s=200&d=identicon" itemprop="image" alt="Avatar">
   {{ end }}
   <div class="media-body">
-    <h5 class="card-title" itemprop="name"><a href="{{ "/" | relLangURL }}">{{ $.Site.Params.name }}</a></h5>
-    {{ with $.Site.Params.role }}<h6 class="card-subtitle">{{.}}</h6>{{end}}
-    {{ with $.Site.Params.bio }}<p class="card-text" itemprop="description">{{. | markdownify | emojify}}</p>{{end}}
+    <h5 class="card-title" itemprop="name">{{ if $author_url }}<a href="{{ $author_url }}">{{ end }}{{ $author_name | markdownify }}{{ if $author_url }}</a>{{ end }}</h5>
+    <!-- {{ with $author_role }}<h6 class="card-subtitle">{{.}}</h6>{{end}} -->
+    {{ with $author_bio }}<p class="card-text" itemprop="description">{{. | markdownify | emojify }}</p>{{end}}
     <ul class="network-icon" aria-hidden="true">
-      {{ range $.Site.Params.social }}
+      {{ if $author_social }}
+      {{ range $author_social }}
       {{ $pack := or .icon_pack "fas" }}
       {{ $pack_prefix := $pack }}
       {{ if in (slice "fab" "fas" "far" "fal") $pack }}
@@ -37,6 +58,7 @@
           <i class="{{ $pack }} {{ $pack_prefix }}-{{ .icon }}"></i>
         </a>
       </li>
+      {{ end }}
       {{ end }}
     </ul>
   </div>
