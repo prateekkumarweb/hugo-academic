@@ -129,6 +129,12 @@
 - id: last_updated
   translation: Last updated on
 
+- id: site_last_updated
+  translation: Site last updated on
+
+- id: page_last_updated
+  translation: This page was last updated on
+
 - id: links
   translation: Links
 
@@ -145,6 +151,11 @@
 
 - id: filter_all
   translation: All
+
+# Projects widget
+
+- id: more_projects
+  translation: More Projects
 
 # Project details
 
