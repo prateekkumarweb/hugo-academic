@@ -4,7 +4,7 @@
 
   {{/* If `authors` is set and is not empty. */}}
   {{ if $.Params.authors }}
-  {{ $authorLen := len $.Params.authors }}
+  {{- $authorLen := len $.Params.authors -}}
   <div>
     {{ range $k, $v := $.Params.authors -}}
     <span itemscope itemprop="author" itemtype="http://schema.org/Person">
