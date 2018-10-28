@@ -1,0 +1,24 @@
+{{- with .Params.authors -}}
+  {{- $authors := . -}}
+  {{- range $index, $element := $authors -}}
+    {{- $value := "" -}}
+    {{- $key := substr $element 1 -}}
+    {{- if (and (eq (substr $element 0 1) "@") $.Site.Data.people) -}}
+      {{- $author := index $.Site.Data.people $key -}}
+      {{- $name := index $author "name" -}}
+      {{- $url := index $author "url" -}}
+      {{- if $url -}}
+        {{- $value = printf "[%s](%s)" $name $url -}}
+      {{- else -}}
+        {{- $value = $name -}}
+      {{- end -}}
+    {{- else -}}
+      {{- . | markdownify -}}
+    {{- end -}}
+    {{- if (ne (add $index 1) (len $authors)) -}}
+      {{- printf "%s,&nbsp;" $value | markdownify -}}
+    {{- else -}}
+      {{- $value | markdownify -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
