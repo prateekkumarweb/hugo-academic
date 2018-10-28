@@ -5,7 +5,7 @@
 <!-- Publications widget -->
 <div class="row">
   <div class="col-12 col-lg-4 section-heading">
-    <h1>{{ with $page.Title }}{{ . | markdownify }}{{ end }}</h1>
+    <h2>{{ with $page.Title }}{{ . | markdownify }}{{ end }}</h2>
     {{ with $page.Params.subtitle }}<p>{{ . | markdownify }}</p>{{ end }}
     {{ if gt $pubs_len $page.Params.count }}
     <p class="view-all">
