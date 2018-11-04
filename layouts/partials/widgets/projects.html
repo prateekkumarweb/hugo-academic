@@ -20,7 +20,7 @@
 <div class="margin-auto">
 
   <div class="center-text">
-    {{ with $page.Title }}<h1 class="mt-0">{{ . | markdownify }}</h1>{{ end }}
+    {{ with $page.Title }}<h2 class="mt-0">{{ . | markdownify }}</h2>{{ end }}
     {{ with $page.Params.subtitle }}<p>{{ . | markdownify }}</p>{{ end }}
   </div>
   <div>
