@@ -34,6 +34,22 @@
       {{- end -}}
     {{- end -}}
 
+    {{- $authors := slice -}}
+    {{- $authors_list := .Params.Authors -}}
+    {{- range $index, $element := $authors_list -}}
+      {{- $key := substr $element 1 -}}
+      {{- if (and (eq (substr $element 0 1) "@") $.Site.Data.people) -}}
+        {{- $author := index $.Site.Data.people $key -}}
+        {{- if $author -}}
+          {{- $authors = $authors | append (index $author "name") -}}
+        {{- else -}}
+          {{- $authors = $authors | append $element -}}
+        {{- end -}}
+      {{- else -}}
+        {{- $authors = $authors | append $element -}}
+      {{- end -}}
+    {{- end -}}
+
     {{- /* Add page to index. */ -}}
     {{- $index = $index | append (dict "objectID" .UniqueID "date" .Date.UTC.Unix "publishdate" .PublishDate "lastmod" .Lastmod.UTC.Unix "expirydate" .ExpiryDate.UTC.Unix "lang" .Lang "permalink" .Permalink "relpermalink" .RelPermalink "title" .Title "summary" (plainify $desc) "content" .Plain "authors" $authors "kind" .Kind "type" .Type "section" .Section "tags" .Params.Tags "categories" .Params.Categories) -}}
 

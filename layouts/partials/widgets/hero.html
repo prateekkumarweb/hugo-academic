@@ -21,9 +21,9 @@ url('{{ $overlay_img }}')
 
   <div class="container">
 
-    <h1 class="hero-title" itemprop="headline">
+    <h2 class="hero-title" itemprop="headline">
       {{ with $page.Title }}{{ . | markdownify }}{{ end }}
-    </h1>
+    </h2>
 
     {{ with $page.Content }}
     <p class="hero-lead">{{ . | markdownify }}</p>
