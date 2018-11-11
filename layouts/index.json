@@ -18,21 +18,6 @@
     {{- else -}}
       {{- $desc = .Summary -}}
     {{- end -}}
-    {{- $authors := slice -}}
-    {{- $authors_list := .Params.Authors -}}
-    {{- range $index, $element := $authors_list -}}
-      {{- $key := substr $element 1 -}}
-      {{- if (and (eq (substr $element 0 1) "@") $.Site.Data.people) -}}
-        {{- $author := index $.Site.Data.people $key -}}
-        {{- if $author -}}
-          {{- $authors = $authors | append (index $author "name") -}}
-        {{- else -}}
-          {{- $authors = $authors | append $element -}}
-        {{- end -}}
-      {{- else -}}
-        {{- $authors = $authors | append $element -}}
-      {{- end -}}
-    {{- end -}}
 
     {{- $authors := slice -}}
     {{- $authors_list := .Params.Authors -}}
