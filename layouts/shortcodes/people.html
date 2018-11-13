@@ -1,0 +1,8 @@
+{{- $v := .Get 0 -}}
+{{- $k := .Get 1 -}}
+{{- if (isset .Site.Data.people $v) -}}
+{{- $p := index .Site.Data.people $v -}}
+{{- index $p $k -}}
+{{- else -}}
+{{- "" -}}
+{{- end -}}
