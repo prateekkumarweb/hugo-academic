@@ -1,5 +1,5 @@
 {{ if not (or (eq .Site.Params.profile false) (eq .Params.profile false)) }}
-
+{{ if (.Params.authors) }}
 {{/* if or (not .Params.authors) (eq $author $.Site.Params.name) */}}
 <div class="col-12"><h3>Authors</h3></div>
 <div class="row author-card">
@@ -67,4 +67,5 @@
 </div>
 {{end}}
 </div>
+{{end}}
 {{end}}
