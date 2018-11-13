@@ -8,7 +8,7 @@
       {{- $name := index $author "name" -}}
       {{- $url := index $author "url" -}}
       {{- if $url -}}
-        {{- $value = printf "<a href=\"%s\" style=\"color: rgba(0, 0, 0, 0.8);\">%s</a>" $url $name -}}
+        {{- $value = printf "[%s](%s)" $name $url -}}
       {{- else -}}
         {{- $value = $name -}}
       {{- end -}}
