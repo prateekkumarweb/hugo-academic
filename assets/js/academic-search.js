@@ -1,6 +1,8 @@
 /*************************************************
- *  Academic: the website framework for Hugo.
+ *  Academic
  *  https://github.com/gcushen/hugo-academic
+ *
+ *  In-built Fuse based search algorithm.
  **************************************************/
 
 /* ---------------------------------------------------------------------------
@@ -51,9 +53,6 @@ function initSearch(force, fuse) {
   // If query deleted, clear results.
   if ( query.length < 1) {
     $('#search-hits').empty();
-    $('.docs-content .article').show();
-  } else {
-    $('.docs-content .article').hide();
   }
 
   // Check for timer event (enter key not pressed) and query less than minimum length required.
@@ -72,10 +71,8 @@ function searchAcademic(query, fuse) {
   let results = fuse.search(query);
   // console.log({"results": results});
 
-  if ($('.docs-content').length > 0)
-    $('#search-hits').append('<h1>' + i18n.results + '</h1>');
-
   if (results.length > 0) {
+    $('#search-hits').append('<h3 class="mt-0">' + results.length + ' ' + i18n.results + '</h3>');
     parseResults(query, results);
   } else {
     $('#search-hits').append('<div class="search-no-results">' + i18n.no_results + '</div>');
@@ -149,25 +146,31 @@ function render(template, data) {
 * Initialize.
 * --------------------------------------------------------------------------- */
 
+// If Academic's in-built search is enabled and Fuse loaded, then initialize it.
+if (typeof Fuse === 'function') {
 // Wait for Fuse to initialize.
-$.getJSON( search_index_filename, function( search_index ) {
-  let fuse = new Fuse(search_index, fuseOptions);
+  $.getJSON(search_index_filename, function (search_index) {
+    let fuse = new Fuse(search_index, fuseOptions);
 
-  // On page load, check for search query in URL.
-  if (query = getSearchQuery('q')) {
-    $("#search-query").val(query);
-    initSearch(true, fuse);
-  }
-
-  // On search box key up, process query.
-  $('#search-query').keyup(function (e) {
-    clearTimeout($.data(this, 'searchTimer')); // Ensure only one timer runs!
-    if (e.keyCode == 13) {
+    // On page load, check for search query in URL.
+    if (query = getSearchQuery('q')) {
+      $("body").addClass('searching');
+      $('.search-results').css({opacity: 0, visibility: "visible"}).animate({opacity: 1},200);
+      $("#search-query").val(query);
+      $("#search-query").focus();
       initSearch(true, fuse);
-    } else {
-      $(this).data('searchTimer', setTimeout(function () {
-        initSearch(false, fuse);
-      }, 250));
     }
+
+    // On search box key up, process query.
+    $('#search-query').keyup(function (e) {
+      clearTimeout($.data(this, 'searchTimer')); // Ensure only one timer runs!
+      if (e.keyCode == 13) {
+        initSearch(true, fuse);
+      } else {
+        $(this).data('searchTimer', setTimeout(function () {
+          initSearch(false, fuse);
+        }, 250));
+      }
+    });
   });
-});
+}
