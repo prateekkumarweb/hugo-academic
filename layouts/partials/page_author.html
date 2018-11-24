@@ -1,6 +1,8 @@
 {{ if not (or (eq .Site.Params.profile false) (eq .Params.profile false)) }}
-
+{{ if (.Params.authors) }}
 {{/* if or (not .Params.authors) (eq $author $.Site.Params.name) */}}
+<div class="col-12"><h3>Authors</h3></div>
+<div class="row author-card">
 {{- range $index, $element := .Params.authors -}}
 {{- $value := "" -}}
 {{- $key := substr $element 1 -}}
@@ -23,7 +25,7 @@
   {{- $author_bio = index $author "bio" -}}
   {{- $author_social = index $author "social" -}}
 {{- end -}}
-<div class="media author-card" itemscope itemtype="http://schema.org/Person">
+<div class="media col-lg-6 mt-1 mb-3" itemscope itemtype="http://schema.org/Person">
   {{ if $author_gravatar }}
   <img class="portrait mr-3" src="https://www.gravatar.com/avatar/{{ md5 $author_email }}?s=200" itemprop="image" alt="Avatar">
   {{ else if $author_avatar }}
@@ -34,10 +36,10 @@
   <img class="portrait mr-3" src="https://www.gravatar.com/avatar/{{ md5 $author_name }}?s=200&d=identicon" itemprop="image" alt="Avatar">
   {{ end }}
   <div class="media-body">
-    <h5 class="card-title" itemprop="name">{{ if $author_url }}<a href="{{ $author_url }}">{{ end }}{{ $author_name | markdownify }}{{ if $author_url }}</a>{{ end }}</h5>
+    <h5 class="card-title mb-0" itemprop="name">{{ if $author_url }}<a href="{{ $author_url }}">{{ end }}{{ $author_name | markdownify }}{{ if $author_url }}</a>{{ end }}</h5>
     <!-- {{ with $author_role }}<h6 class="card-subtitle">{{.}}</h6>{{end}} -->
     {{ with $author_bio }}<p class="card-text" itemprop="description">{{. | markdownify | emojify }}</p>{{end}}
-    <ul class="network-icon" aria-hidden="true">
+    <ul class="network-icon mt-2" aria-hidden="true">
       {{ if $author_social }}
       {{ range $author_social }}
       {{ $pack := or .icon_pack "fas" }}
@@ -62,6 +64,8 @@
       {{ end }}
     </ul>
   </div>
+</div>
+{{end}}
 </div>
 {{end}}
 {{end}}
