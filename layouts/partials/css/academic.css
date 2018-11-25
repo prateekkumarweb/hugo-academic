@@ -958,7 +958,7 @@ article .article-metadata {
 }
 
 .authors-list a {
-  color: rgba(0, 0, 0, 0.8);
+  color: inherit;
 }
 
 /*************************************************
@@ -999,8 +999,8 @@ article .article-metadata {
  **************************************************/
 
 .author-card {
-  margin-top: 1rem;
-  padding-top: 1rem;
+  /*margin-top: 1rem;
+  padding-top: 1rem;*/
   border-top: 1px solid rgba(0,0,0,.05);
 }
 
@@ -1011,14 +1011,14 @@ article .article-metadata {
 .author-card .portrait {
   width: 60px;
   height: 60px;
-  margin: 0 auto;
-  border-radius: 50%;
+  /*margin: 0 auto;*/
+  /*border-radius: 50%;*/
   object-fit: cover;
 }
 
 .author-card .card-title {
-  margin-top: 0;
-  margin-bottom: 15px;
+  /*margin-top: 0;
+  margin-bottom: 15px;*/
   font-weight: 600;
   color: rgba(0, 0, 0, 0.84);
 }
@@ -1033,14 +1033,14 @@ article .article-metadata {
 }
 
 .author-card p {
-  margin-bottom: 5px;
+  /*margin-bottom: 5px;*/
 }
 
 .author-card .card-subtitle {
   font-weight: 300;
   font-size: 0.8rem;
   color: rgba(0, 0, 0, 0.54);
-  margin-bottom: 7px;
+  /*margin-bottom: 7px;*/
 }
 
 .dark .author-card .card-subtitle {
@@ -1050,7 +1050,7 @@ article .article-metadata {
 .author-card .card-text {
   color: rgba(0, 0, 0, 0.76);
   font-size: 0.8rem;
-  margin-bottom: 4px;
+  /*margin-bottom: 4px;*/
 }
 
 .dark .author-card .card-text {
