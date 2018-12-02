@@ -25,7 +25,7 @@
   {{- $author_bio = index $author "bio" -}}
   {{- $author_social = index $author "social" -}}
 {{- end -}}
-<div class="media col-6 p-2" itemscope itemtype="http://schema.org/Person">
+<div class="media col-11 col-sm-5 m-2 p-2 rounded border border-primary" itemscope itemtype="http://schema.org/Person">
   <div class="mr-2 p-0">
   {{ if $author_gravatar }}
   <img class="portrait rounded-circle" src="https://www.gravatar.com/avatar/{{ md5 $author_email }}?s=200" itemprop="image" alt="Avatar">
