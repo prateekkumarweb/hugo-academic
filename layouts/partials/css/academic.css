@@ -26,13 +26,13 @@ body {
   line-height: inherit;
   color: inherit;
   background-color: {{ .Get "background" }};
-  margin-top: 71px; /* Offset body content by navbar height. */
+  margin-top: 70px; /* Offset body content by navbar height. */
   padding-top: 0;
   counter-reset: captions;
 }
 @media screen and (max-width: 1200px) { /* Match max-width of .nav-bar query. */
   body {
-    margin-top: 51px; /* Offset body content by navbar height. */
+    margin-top: 50px; /* Offset body content by navbar height. */
   }
 }
 
@@ -242,6 +242,7 @@ small,
 
 .search-results {
   transform: scale(0);
+  -webkit-transform: scale(0);
   background-color: {{ .Get "background" }};
   bottom: 0;
   left: 0;
@@ -263,6 +264,7 @@ small,
 
 .searching .search-results {
   transform: scale(1);
+  -webkit-transform: scale(1);
   visibility: visible;
   z-index: 11; /* Second highest index, after navbar. */
 }
@@ -272,14 +274,26 @@ small,
 }
 
 .search-results > .container {
-  padding-top: calc(70px + 2rem); /* Max responsive navbar height plus padding. */
+  padding-top: 70px;  /* Navbar height. */
+}
+@media screen and (max-width: 1200px) {
+  .search-results > .container {
+    padding-top: 50px;  /* Navbar height. */
+  }
 }
 
 .search-header {
-  background-color: {{ .Get "background" }};
+  position: -webkit-sticky;
   position: sticky;
-  top: calc(70px + 2rem); /* Max responsive navbar height plus padding. */
+  top: 70px;  /* Navbar height. */
+  background-color: {{ .Get "background" }};
+  padding-top: 2rem;
   padding-bottom: 1rem;
+}
+@media screen and (max-width: 1200px) {
+  .search-header {
+    top: 50px;  /* Navbar height. */
+  }
 }
 
 .dark .search-header {
@@ -471,6 +485,14 @@ a[data-fancybox] img {
 
 .home-section:nth-of-type(even) {
   background-color: {{ .Get "home_section_even" }};
+}
+
+.dark .home-section {
+  background-color: {{ .Get "dark_home_section_odd" }};
+}
+
+.dark .home-section:nth-of-type(even) {
+  background-color: {{ .Get "dark_home_section_even" }};
 }
 
 @media screen and (max-width: 768px) {
@@ -907,7 +929,7 @@ article .article-metadata {
 }
 
 .authors-list a {
-  color: rgba(0, 0, 0, 0.8);
+  color: inherit;
 }
 
 /*************************************************
@@ -948,8 +970,8 @@ article .article-metadata {
  **************************************************/
 
 .author-card {
-  margin-top: 1rem;
-  padding-top: 1rem;
+  /*margin-top: 1rem;
+  padding-top: 1rem;*/
   border-top: 1px solid rgba(0,0,0,.05);
 }
 
@@ -960,14 +982,14 @@ article .article-metadata {
 .author-card .portrait {
   width: 60px;
   height: 60px;
-  margin: 0 auto;
-  border-radius: 50%;
+  /*margin: 0 auto;*/
+  /*border-radius: 50%;*/
   object-fit: cover;
 }
 
 .author-card .card-title {
-  margin-top: 0;
-  margin-bottom: 15px;
+  /*margin-top: 0;
+  margin-bottom: 15px;*/
   font-weight: 600;
   color: rgba(0, 0, 0, 0.84);
 }
@@ -982,14 +1004,14 @@ article .article-metadata {
 }
 
 .author-card p {
-  margin-bottom: 5px;
+  /*margin-bottom: 5px;*/
 }
 
 .author-card .card-subtitle {
   font-weight: 300;
   font-size: 0.8rem;
   color: rgba(0, 0, 0, 0.54);
-  margin-bottom: 7px;
+  /*margin-bottom: 7px;*/
 }
 
 .dark .author-card .card-subtitle {
@@ -999,7 +1021,7 @@ article .article-metadata {
 .author-card .card-text {
   color: rgba(0, 0, 0, 0.76);
   font-size: 0.8rem;
-  margin-bottom: 4px;
+  /*margin-bottom: 4px;*/
 }
 
 .dark .author-card .card-text {
@@ -1852,9 +1874,9 @@ div.alert a {
     .docs-sidebar {
       position: -webkit-sticky;
       position: sticky;
-      top: 51px;
+      top: 50px;
       z-index: 10;
-      height: calc(100vh - 51px)
+      height: calc(100vh - 50px)
     }
   }
 }
@@ -1867,9 +1889,9 @@ div.alert a {
     .docs-sidebar {
       position: -webkit-sticky;
       position: sticky;
-      top: 71px;
+      top: 70px;
       z-index: 10;
-      height: calc(100vh - 71px)
+      height: calc(100vh - 70px)
     }
   }
 }
@@ -1922,7 +1944,7 @@ div.alert a {
 @media (min-width:768px) {
   @supports ((position:-webkit-sticky) or (position:sticky)) {
     .docs-links {
-      max-height: calc(100vh - 5rem - 71px);
+      max-height: calc(100vh - 5rem - 70px);
       overflow-y: auto;
     }
   }
@@ -1947,8 +1969,8 @@ div.alert a {
   .docs-toc {
     position: -webkit-sticky;
     position: sticky;
-    top: 71px;
-    height: calc(100vh - 71px);
+    top: 70px;
+    height: calc(100vh - 70px);
     overflow-y: auto
   }
 }
@@ -2054,7 +2076,7 @@ body.dark,
 .dark .form-control,
 .dark .form-control:focus {
   color: rgb(248, 248, 242);
-  background: rgb(40, 42, 54);
+  background: {{ .Get "dark_background" }};
 }
 
 .dark .form-control {
